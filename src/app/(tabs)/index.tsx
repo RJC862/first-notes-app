@@ -1,13 +1,34 @@
 import AddNewNoteButton from "@/components/AddNewNoteButton";
-import { StyleSheet, View } from "react-native";
+import CloseNoteButton from "@/components/CloseNoteButton";
+import { useState } from "react";
+import { Modal, StyleSheet, View } from "react-native";
 
 export default function Index() {
+  const [modalVisible, setModalVisible] = useState<boolean>(false);
+
   const newNote = () => {
-    // functionality
+    setModalVisible(true);
   };
+
+  const closeNote = () => {
+    setModalVisible(false);
+  };
+
   return (
     <View style={styles.rootContainer}>
-      <AddNewNoteButton onPress={newNote} />
+      <View>
+        <AddNewNoteButton onPress={newNote} />
+      </View>
+
+      <Modal
+        animationType="slide"
+        visible={modalVisible}
+        onRequestClose={() => {
+          setModalVisible(!modalVisible);
+        }}
+      >
+        <CloseNoteButton onPress={closeNote} />
+      </Modal>
     </View>
   );
 }
