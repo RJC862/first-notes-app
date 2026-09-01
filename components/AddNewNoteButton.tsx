@@ -1,5 +1,5 @@
 import { MaterialIcons } from "@expo/vector-icons";
-import { Pressable, StyleSheet, View } from "react-native";
+import { Pressable, StyleSheet, Text, View } from "react-native";
 
 type Props = {
   onPress: () => void;
@@ -7,32 +7,66 @@ type Props = {
 
 export default function AddNewNoteButton({ onPress }: Props) {
   return (
-    <View style={styles.newNoteButtonContainer}>
-      <Pressable onPress={onPress}>
-        <View style={styles.iconContainer}>
-          <MaterialIcons name="add" size={20} color="#ED7845" />
-        </View>
-      </Pressable>
-    </View>
+    <Pressable
+      onPress={onPress}
+      style={({ hovered }) => [
+        styles.buttonContainer,
+        hovered && styles.buttonHovered,
+      ]}
+    >
+      <View style={styles.iconContainer}>
+        <MaterialIcons
+          name="add"
+          size={20}
+          color="#ED7845"
+          style={{ marginTop: 2 }}
+        />
+        <Text style={styles.text}>New Note</Text>
+      </View>
+    </Pressable>
   );
 }
 
 const styles = StyleSheet.create({
-  newNoteButtonContainer: {
-    width: 40,
+  buttonContainer: {
+    paddingHorizontal: 10,
     height: 40,
     marginHorizontal: 50,
     marginVertical: 25,
     borderRadius: 10,
-    borderWidth: 1,
-    borderColor: "#F5EB27",
-    padding: 3,
+    borderWidth: 2,
+    borderColor: "#A88F00",
     alignSelf: "flex-end",
+    alignItems: "center",
+
+    transitionProperty: "background-color, border-color",
+    transitionDuration: "100ms",
   },
 
   iconContainer: {
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
+    flexDirection: "row",
+  },
+
+  text: {
+    color: "#ED7845",
+    fontSize: 16,
+    fontWeight: 600,
+    includeFontPadding: false,
+  },
+
+  buttonHovered: {
+    paddingHorizontal: 10,
+    height: 40,
+    marginHorizontal: 50,
+    marginVertical: 25,
+    borderRadius: 10,
+    borderWidth: 2,
+    borderColor: "#A88F00",
+    alignSelf: "flex-end",
+    alignItems: "center",
+    backgroundColor: "rgba(245, 235, 39, 0.1)",
   },
 });

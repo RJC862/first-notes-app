@@ -7,9 +7,7 @@ export default function Index() {
   };
   return (
     <View style={styles.rootContainer}>
-      <View style={styles.newNoteButtonContainer}>
-        <AddNewNoteButton onPress={newNote} />
-      </View>
+      <AddNewNoteButton onPress={newNote} />
     </View>
   );
 }
@@ -18,9 +16,5 @@ const styles = StyleSheet.create({
   rootContainer: {
     flex: 1,
     backgroundColor: "#222120",
-  },
-
-  newNoteButtonContainer: {
-    justifyContent: "flex-end",
   },
 });
