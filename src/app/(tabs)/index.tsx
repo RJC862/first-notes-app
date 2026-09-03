@@ -1,7 +1,7 @@
 import AddNewNoteButton from "@/components/AddNewNoteButton";
-import CloseNoteButton from "@/components/CloseNoteButton";
+import NoteModal from "@/components/NoteModal";
 import { useState } from "react";
-import { Modal, StyleSheet, View } from "react-native";
+import { StyleSheet, View } from "react-native";
 
 export default function Index() {
   const [modalVisible, setModalVisible] = useState<boolean>(false);
@@ -15,21 +15,16 @@ export default function Index() {
   };
 
   return (
-    <View style={styles.rootContainer}>
-      <View>
-        <AddNewNoteButton onPress={newNote} />
+    <>
+      <View style={styles.rootContainer}>
+        <View>
+          <AddNewNoteButton onPress={newNote} />
+        </View>
+        <View style={styles.noteContainer}>
+          <NoteModal closeNote={closeNote} modalVisible={modalVisible} />
+        </View>
       </View>
-
-      <Modal
-        animationType="slide"
-        visible={modalVisible}
-        onRequestClose={() => {
-          setModalVisible(!modalVisible);
-        }}
-      >
-        <CloseNoteButton onPress={closeNote} />
-      </Modal>
-    </View>
+    </>
   );
 }
 
@@ -37,5 +32,13 @@ const styles = StyleSheet.create({
   rootContainer: {
     flex: 1,
     backgroundColor: "#222120",
+  },
+
+  noteContainer: {
+    flex: 1,
+    flexDirection: "column",
+    gap: 10,
+    justifyContent: "center",
+    alignItems: "center",
   },
 });
