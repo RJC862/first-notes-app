@@ -16,8 +16,6 @@ export default function CloseNoteButton({ onPress }: Props) {
 const styles = StyleSheet.create({
   buttonContainer: {
     alignSelf: "flex-end",
-    marginTop: 10,
-    marginRight: 10,
-    flex: 1,
+    padding: 10,
   },
 });

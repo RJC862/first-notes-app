@@ -2,7 +2,7 @@ import { useState } from "react";
 import { StyleSheet, TextInput, View } from "react-native";
 
 export default function NoteTextInput() {
-  const [text, onChangeText] = useState<string>("hi");
+  const [text, onChangeText] = useState<string>("");
   return (
     <View style={styles.container}>
       <TextInput
@@ -10,6 +10,8 @@ export default function NoteTextInput() {
         onChangeText={onChangeText}
         value={text}
         multiline={true}
+        placeholder=">"
+        placeholderTextColor="#E7E5E4"
       />
     </View>
   );
@@ -18,12 +20,13 @@ export default function NoteTextInput() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: "#222120",
   },
   input: {
     flex: 1,
-    marginLeft: 10,
-    marginRight: 40,
+    padding: 30,
     fontSize: 20,
     outlineStyle: "none" as any,
+    color: "#E7E5E4",
   },
 });
