@@ -1,5 +1,5 @@
 import { MaterialIcons } from "@expo/vector-icons";
-import { Pressable, StyleSheet } from "react-native";
+import { Pressable, StyleSheet, View } from "react-native";
 
 type Props = {
   onPress: () => void;
@@ -7,15 +7,22 @@ type Props = {
 
 export default function CloseNoteButton({ onPress }: Props) {
   return (
-    <Pressable onPress={onPress} style={styles.buttonContainer}>
-      <MaterialIcons name="close" size={25} color={"#E7180B"} />
+    <Pressable onPress={onPress} style={styles.button}>
+      <View style={styles.iconContainer}>
+        <MaterialIcons name="close" size={25} color={"#E7180B"} />
+      </View>
     </Pressable>
   );
 }
 
 const styles = StyleSheet.create({
-  buttonContainer: {
-    alignSelf: "flex-end",
-    padding: 10,
+  button: {
+    padding: 16,
+  },
+
+  iconContainer: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
   },
 });

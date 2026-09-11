@@ -14,6 +14,10 @@ export default function Index() {
     setModalVisible(false);
   };
 
+  const saveNote = () => {
+    //implement
+  };
+
   return (
     <>
       <View style={styles.rootContainer}>
@@ -21,7 +25,11 @@ export default function Index() {
           <AddNewNoteButton onPress={newNote} />
         </View>
         <View style={styles.noteContainer}>
-          <NoteModal closeNote={closeNote} modalVisible={modalVisible} />
+          <NoteModal
+            closeNote={closeNote}
+            modalVisible={modalVisible}
+            saveNote={saveNote}
+          />
         </View>
       </View>
     </>
