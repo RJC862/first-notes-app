@@ -1,6 +1,6 @@
-import { Modal, StyleSheet, View } from "react-native";
+import { useState } from "react";
+import { Modal, StyleSheet, TextInput, View } from "react-native";
 import CloseNoteButton from "./CloseNoteButton";
-import NoteTextInput from "./NoteTextInput";
 import SaveNoteButton from "./SaveNoteButton";
 
 type Props = {
@@ -13,6 +13,7 @@ export default function NoteModal({
   modalVisible,
   saveNote,
 }: Props) {
+  const [text, onChangeText] = useState<string>("");
   return (
     <Modal
       animationType="slide"
@@ -23,7 +24,16 @@ export default function NoteModal({
         <SaveNoteButton onPress={saveNote} />
         <CloseNoteButton onPress={closeNote} />
       </View>
-      <NoteTextInput />
+      <View style={styles.textContainer}>
+        <TextInput
+          style={styles.textInput}
+          onChangeText={onChangeText}
+          value={text}
+          multiline={true}
+          placeholder=">"
+          placeholderTextColor="#E7E5E4"
+        />
+      </View>
     </Modal>
   );
 }
@@ -36,5 +46,16 @@ const styles = StyleSheet.create({
     backgroundColor: "#222120",
     borderBottomWidth: 2,
     borderBottomColor: "#E7E5E4",
+  },
+  textContainer: {
+    flex: 1,
+    backgroundColor: "#222120",
+  },
+  textInput: {
+    flex: 1,
+    padding: 30,
+    fontSize: 20,
+    outlineStyle: "none" as any,
+    color: "#E7E5E4",
   },
 });

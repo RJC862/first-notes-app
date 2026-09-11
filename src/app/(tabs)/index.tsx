@@ -14,10 +14,7 @@ export default function Index() {
     setModalVisible(false);
   };
 
-  const saveNote = () => {
-    //implement
-  };
-
+  const saveNote = () => {};
   return (
     <>
       <View style={styles.rootContainer}>
