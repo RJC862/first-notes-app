@@ -2,25 +2,26 @@ import { MaterialIcons } from "@expo/vector-icons";
 import { Pressable, StyleSheet, View } from "react-native";
 
 type Props = {
-  text: string;
   onPress: () => void;
 };
 
-export default function SaveNoteButton({ text, onPress }: Props) {
+export default function SaveNoteButton({ onPress }: Props) {
   return (
-    <Pressable onPress={onPress} style={styles.button}>
-      <View style={styles.overlayContainer}>
-        <MaterialIcons name="circle" size={30} />
-        <View style={styles.overlayIcon}>
-          <MaterialIcons name="check" size={20} color="#F0B13B" />
+    <View style={styles.buttonContainer}>
+      <Pressable onPress={onPress}>
+        <View style={styles.overlayContainer}>
+          <MaterialIcons name="circle" size={30} />
+          <View style={styles.overlayIcon}>
+            <MaterialIcons name="check" size={20} color="#F0B13B" />
+          </View>
         </View>
-      </View>
-    </Pressable>
+      </Pressable>
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
-  button: {
+  buttonContainer: {
     padding: 16,
   },
   overlayContainer: { flex: 1, justifyContent: "center", alignItems: "center" },

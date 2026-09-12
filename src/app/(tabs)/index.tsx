@@ -1,10 +1,12 @@
 import AddNewNoteButton from "@/components/AddNewNoteButton";
 import NoteModal from "@/components/NoteModal";
-import { useState } from "react";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { useEffect, useState } from "react";
 import { StyleSheet, View } from "react-native";
 
 export default function Index() {
   const [modalVisible, setModalVisible] = useState<boolean>(false);
+  const [notes, setNotes] = useState<String[]>([]);
 
   const newNote = () => {
     setModalVisible(true);
@@ -15,17 +17,27 @@ export default function Index() {
   };
 
   const saveNote = () => {};
+
+  const loadNotesLocally = async () => {
+    const data = await AsyncStorage.getItem("user_notes");
+    if (data) setNotes(JSON.parse(data));
+  };
+
+  useEffect(() => {
+    loadNotesLocally();
+  }, []);
   return (
     <>
       <View style={styles.rootContainer}>
         <View>
           <AddNewNoteButton onPress={newNote} />
         </View>
+
         <View style={styles.noteContainer}>
           <NoteModal
             closeNote={closeNote}
             modalVisible={modalVisible}
-            saveNote={saveNote}
+            saveNote={loadNotesLocally}
           />
         </View>
       </View>

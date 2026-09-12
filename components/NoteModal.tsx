@@ -1,3 +1,4 @@
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useState } from "react";
 import { Modal, StyleSheet, TextInput, View } from "react-native";
 import CloseNoteButton from "./CloseNoteButton";
@@ -14,32 +15,39 @@ export default function NoteModal({
   saveNote,
 }: Props) {
   const [text, onChangeText] = useState<string>("");
+
+  const handleSave = async () => {
+    if (!text.trim()) return;
+
+    const existingData = await AsyncStorage.getItem("user_notes");
+    const currentNotes = existingData ? JSON.parse(existingData) : [];
+    const updatedNotes = [...currentNotes, text];
+    await AsyncStorage.setItem("user_notes", JSON.stringify(updatedNotes));
+  };
   return (
-    <Modal
-      animationType="slide"
-      visible={modalVisible}
-      style={styles.modalContainer}
-    >
-      <View style={styles.buttonContainer}>
-        <SaveNoteButton onPress={saveNote} />
-        <CloseNoteButton onPress={closeNote} />
-      </View>
-      <View style={styles.textContainer}>
-        <TextInput
-          style={styles.textInput}
-          onChangeText={onChangeText}
-          value={text}
-          multiline={true}
-          placeholder=">"
-          placeholderTextColor="#E7E5E4"
-        />
+    <Modal animationType="slide" visible={modalVisible}>
+      <View style={styles.modalContent}>
+        <View style={styles.buttonContainer}>
+          <SaveNoteButton onPress={saveNote} />
+          <CloseNoteButton onPress={closeNote} />
+        </View>
+        <View style={styles.textContainer}>
+          <TextInput
+            style={styles.textInput}
+            onChangeText={onChangeText}
+            value={text}
+            multiline={true}
+            placeholder=">"
+            placeholderTextColor="#E7E5E4"
+          />
+        </View>
       </View>
     </Modal>
   );
 }
 
 const styles = StyleSheet.create({
-  modalContainer: { flex: 1, backgroundColor: "#222120" },
+  modalContent: { flex: 1, backgroundColor: "#222120" },
   buttonContainer: {
     flexDirection: "row",
     justifyContent: "space-between",
